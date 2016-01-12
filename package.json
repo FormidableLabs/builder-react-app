@@ -1,0 +1,33 @@
+{
+  "name": "builder-react-app",
+  "version": "0.1.0",
+  "description": "Builder Archetype - React App",
+  "main": "index.js",
+  "scripts": {
+    "lint-client": "eslint --ext .js,.jsx -c node_modules/builder-react-app/config/eslint/.eslintrc-client client templates",
+    "lint-client-test": "eslint --ext .js,.jsx -c node_modules/builder-react-app/config/eslint/.eslintrc-client-test test/client",
+    "lint-server": "eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server server",
+    "lint-server-test": "eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server-test test/server test/func",
+    "lint": "builder concurrent lint-client lint-client-test lint-server lint-server-test",
+    "builder:lint-server": "eslint --color -c config/eslint/.eslintrc-server *.js config/karma config/webpack",
+    "builder:lint": "npm run builder:lint-server",
+    "builder:check": "npm run builder:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FormidableLabs/builder-react-app.git"
+  },
+  "author": "Zach Hale <zach.hale@formidable.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FormidableLabs/builder-react-app/issues"
+  },
+  "homepage": "https://github.com/FormidableLabs/builder-react-app#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "builder-support": "0.0.1",
+    "eslint": "^1.10.1",
+    "eslint-config-defaults": "^7.0.1",
+    "eslint-plugin-filenames": "^0.1.2"
+  }
+}

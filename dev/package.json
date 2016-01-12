@@ -1,0 +1,25 @@
+{
+  "name": "builder-react-app-dev",
+  "version": "0.1.0",
+  "description": "Builder Archetype - React App (Development)",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FormidableLabs/builder-react-app.git"
+  },
+  "author": "Zach Hale <zach.hale@formidable.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FormidableLabs/builder-react-app/issues"
+  },
+  "homepage": "https://github.com/FormidableLabs/builder-react-app#readme",
+  "dependencies": {
+    "babel-eslint": "^4.0.10",
+    "eslint": "^1.2.1",
+    "eslint-config-defaults": "^4.2.0",
+    "eslint-plugin-filenames": "^0.1.2",
+    "eslint-plugin-react": "^3.2.3"
+  },
+  "devDependencies": {}
+}
