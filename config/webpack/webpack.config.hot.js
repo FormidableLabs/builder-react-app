@@ -1,8 +1,8 @@
+"use strict";
 /**
  * Webpack production configuration
  */
 /*globals __dirname:false */
-var path = require("path");
 var base = require("./webpack.config.dev");
 
 module.exports = {

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Webpack production configuration
  */
@@ -21,13 +22,6 @@ var ROOT = process.cwd();
 var PKG = require(path.join(ROOT, "package.json"));
 var libPath = (PKG.name || "").toLowerCase();
 if (!libPath) { throw new Error("Need package.json:name field"); }
-// PascalCase (with first character capitalized).
-var libName = libPath
-  .replace(/^\s+|\s+$/g, "")
-  .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
-    // Second match group is the character we want to change. Throw away first.
-    return second.toUpperCase();
-  });
 
 module.exports = {
   cache: true,

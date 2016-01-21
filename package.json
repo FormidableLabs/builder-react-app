@@ -49,8 +49,7 @@
     "hot": "builder concurrent server-wds-test server-wds-hot server-hot",
     "builder:lint-server": "eslint --color -c config/eslint/.eslintrc-server *.js config/karma config/webpack",
     "builder:lint": "npm run builder:lint-server",
-    "builder:check": "npm run builder:lint",
-    "zach": "which eslint"
+    "builder:check": "npm run builder:lint"
   },
   "repository": {
     "type": "git",

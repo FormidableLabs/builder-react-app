@@ -1,8 +1,8 @@
+"use strict";
 /**
  * Webpack development configuration
  */
 /*globals __dirname:false */
-var path = require("path");
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 

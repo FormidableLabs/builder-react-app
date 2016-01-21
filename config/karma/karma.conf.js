@@ -11,17 +11,18 @@ var webpackCfg = require("../webpack/webpack.config.test");
 
 var ROOT = process.cwd();
 var MAIN_PATH = path.join(ROOT, "test/client/main.js");
+var PREPROCESSORS = {};
+PREPROCESSORS[MAIN_PATH] = ["webpack"];
 
 module.exports = function (config) {
   // Start with the "dev" (webpack-dev-server is already running) config
   // and add in the webpack stuff.
+  /* eslint-disable global-require */
   require("./karma.conf.dev")(config);
 
   // Overrides.
   config.set({
-    preprocessors: {
-      [MAIN_PATH]: ["webpack"]
-    },
+    preprocessors: PREPROCESSORS,
     files: [
       // Sinon has issues with webpack. Do global include.
       require.resolve("sinon/pkg/sinon"),

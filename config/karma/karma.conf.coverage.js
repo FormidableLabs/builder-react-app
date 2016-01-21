@@ -10,6 +10,7 @@ var path = require("path");
 var ROOT = process.cwd();
 
 module.exports = function (config) {
+  /* eslint-disable global-require */
   require("./karma.conf")(config);
   config.set({
     reporters: ["spec", "coverage"],
