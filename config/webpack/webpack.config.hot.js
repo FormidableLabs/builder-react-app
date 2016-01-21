@@ -19,13 +19,13 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: [/node_modules/],
         loaders: [
-          require.resolve("react-hot"),
+          require.resolve("react-hot-loader"),
           require.resolve("babel-loader") + "?optional=runtime&stage=2"
         ]
       },
       {
         test: /\.css$/,
-        loader: require.resolve("style-loader") + "!css-loader"
+        loader: require.resolve("style-loader") + "!" + require.resolve("css-loader")
       },
       {
         test: /\.(png|svg|woff|woff2|ttf|eot)$/i,
