@@ -3,8 +3,11 @@ Builder Archetype: React App
 
 A React app archetype for [builder][].
 
-This archetype provides a robust set of scripts and default configs for a
-standard React app project. Included are scripts for
+This archetype provides both a robust set of scripts and default configs for a
+standard React app project as well as a `builder-init` compatible app generator
+for bootstrapping a new react app using this archetype.
+
+Features provided by this archetype's scripts:
 
 * spawning a node server with options for dev and hot-reload modes
 * spawning a webpack server with options for dev and hot-reload modes
@@ -17,6 +20,14 @@ standard React app project. Included are scripts for
   istanbul
 * helper scripts that group common scripts together
 
+Features provided by the builder-init compatible app generator
+
+* uses the builder-react-app archetype for ease of script and config management
+* redux for state management
+* react-router for routing
+* express for API and app routes
+* server-side react rendering w/ bootstrapped data
+
 ## Installation
 
 To use the production and development workflows, install both this package
@@ -26,6 +37,22 @@ and the development module:
 $ npm install --save builder-react-app
 $ npm install --save-dev builder-react-app-dev
 ```
+
+
+## Generator
+
+To bootstrap a new project from scratch with template files from this
+archetype, you can use [builder-init][]:
+
+```sh
+$ npm install -g builder-init
+$ builder-init builder-react-app
+```
+
+This will download this archetype, prompt you for several template data values
+and inflate the [archetype templates](./init) to real files at a chosen
+directory.
+
 
 ## Project Structure
 
@@ -43,43 +70,25 @@ test
     main.js
     test.html
   func/
+    spec/
+      *.spec.js
     setup.dev.js
     setup.js
   server/
+    rest/
+      *.spec.js
+    spec/
+      *.spec.js
     setup.js
 .builderrc
 package.json
 ```
 
+This matches the [`builder-init` templates](init) found in the source of this
+archetype.
+
+
 ## Usage Notes
-
-### Node Server
-
-This archetype provices three server tasks:
-
-* `server` starts the node server
-* `server-dev` # starts a dev server which updates as files change
-* `server-hot` # starts the dev server w/ hot-reload
-
-All server scripts run `server/index.js` with `ENV` vars to specify which
-environment to run.
-
-* `server`: no ENV vars
-* `server-dev`: `WEBPACK_DEV=true`
-* `server-hot`: `WEBPACK_HOT=true`
-
-### Webpack Server
-
-
-
-### Lint
-
-All lint tasks use [`eslint`](http://eslint.org/) defaults published by
-[walmartlabs](https://github.com/walmartlabs). This archetype uses
-`walmart/es6-react` defaults for client scripts and `walmart/es5-node` defaults
-for server scripts. See
-[`eslint-config-defaults`](https://github.com/walmartlabs/eslint-config-defaults)
-for specifics of each of these sets of default rules.
 
 ### Babel
 
@@ -244,4 +253,5 @@ Tasks:
 ```
 
 [builder]: https://github.com/FormidableLabs/builder
+[builder-init]: https://github.com/FormidableLabs/builder-init
 [development]: ./DEVELOPMENT.md

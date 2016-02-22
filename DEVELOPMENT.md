@@ -11,76 +11,26 @@ still respect the specific builder version defined in your project.
 $ npm install builder -g
 ```
 
+
 ## Development
 
-All development tasks consist of watching the demo bundle, the test bundle
-and launching a browser pointed to the demo page.
+All development tasks consist of watching the app bundle and the test bundle.
 
-Run the `demo` application with watched rebuilds either doing:
-
-### Basic Watched Builds
+Run the application with watched rebuilds:
 
 ```sh
-$ builder run dev       # dev test/app server
-$ builder run open-dev  # (OR) dev servers _and a browser window opens!_
+$ builder run dev  # dev test/app server (OR)
+$ builder run hot  # hot reload test/app server (OR)
+$ builder run prod # run the "REAL THING" with watchers
 ```
 
-### Watched Builds + Hot Reloading
+From there you can see:
 
-Same as above, but with hot reloading of React components.
-
-```sh
-$ builder run hot       # hot test/app server
-$ builder run open-hot  # (OR) hot servers _and a browser window opens!_
-```
-
-From there, using either `dev` or `hot`, you can see:
-
-* Demo app: [127.0.0.1:3000](http://127.0.0.1:3000/)
+* App: [127.0.0.1:3000](http://127.0.0.1:3000/)
 * Client tests: [127.0.0.1:3001/test/client/test.html](http://127.0.0.1:3001/test/client/test.html)
 
 
-## Programming Guide
-
-### Logging
-
-We use the following basic pattern for logging:
-
-```js
-if (process.env.NODE_ENV !== "production") {
-  /* eslint-disable no-console */
-  if (typeof console !== "undefined" && console.warn) {
-    console.warn("Oh noes! bad things happened.");
-  }
-  /* eslint-enable no-console */
-}
-```
-
-Replace `console.warn` in the condtional + method call as appropriate.
-
-Breaking this down:
-
-* `process.env.NODE_ENV !== "production"` - This part removes all traces of
-  the code in the production bundle, to save on file size. This _also_ means
-  that no warnings will be displayed in production.
-* `typeof console !== "undefined" && console.METHOD` - A permissive check to
-  make sure the `console` object exists and can use the appropriate `METHOD` -
-  `warn`, `info`, etc.
-
-To signal production mode to the webpack build, declare the `NODE_ENV` variable:
-
-```js
-new webpack.DefinePlugin({
-  "process.env.NODE_ENV": JSON.stringify("production")
-})
-```
-
-Unfortunately, we need to do _all_ of this every time to have Uglify properly
-drop the code, but with this trick, the production bundle has no change in code
-size.
-
-
-## Quality
+## General Checks
 
 ### In Development
 
@@ -120,7 +70,7 @@ $ builder run check-ci  # (OR) PhantomJS,Firefox + coverage - available on Travi
 Which is currently comprised of:
 
 ```sh
-$ builder run lint  # AND ...
+$ builder run lint      # AND ...
 
 $ builder run test      # PhantomJS only
 $ builder run test-cov  # (OR) PhantomJS w/ coverage
@@ -144,45 +94,119 @@ Code coverage reports are outputted to:
 coverage/
   client/
     BROWSER_STRING/
-      lcov-report/index.html  # Viewable web report.
+      lcov-report/index.html  # Viewable web report
+  func/
+    lcov-report/index.html # Viewable web report
+  server/
+    rest/
+      lcov-report/index.html # Viewable web report
+    unit/
+      lcov-report/index.html # Viewable web report
+
 ```
 
-## Releases
 
-**IMPORTANT - NPM**: To correctly run `preversion` your first step is to make
-sure that you have a very modern `npm` binary:
+## Tests
+
+The test suites in this project can be found in the following locations:
+
+```
+test/server
+test/client
+test/func
+```
+
+### Backend Tests
+
+`test/server`
+
+Server-side (aka "backend") tests have two real flavors -- *unit* and *REST*
+tests. To run all the server-side tests, run:
 
 ```sh
-$ npm install -g npm
+$ builder run test-server
 ```
 
-Built files in `dist/` should **not** be committeed during development or PRs.
-Instead we _only_ build and commit them for published, tagged releases. So
-the basic workflow is:
+#### Server-side Unit Tests
+
+`test/server/spec`
+
+Pure JavaScript tests that import the server code and test it in isolation.
+
+* Extremely fast to execute.
+* Typically test pure code logic in isolation.
+
+Run the tests with:
 
 ```sh
-# Make sure you have a clean, up-to-date `master`
-$ git pull
-$ git status # (should be no changes)
-
-# Choose a semantic update for the new version.
-# If you're unsure, read about semantic versioning at http://semver.org/
-$ npm version major|minor|patch -m "Version %s - INSERT_REASONS"
-
-# ... the `dist/` and `lib/` directories are now built, `package.json` is
-# updated, and the appropriate files are committed to git (but unpushed).
-#
-# *Note*: `lib/` is uncommitted, but built and must be present to push to npm.
-
-# Check that everything looks good in last commit and push.
-$ git diff HEAD^ HEAD
-$ git push && git push --tags
-# ... the project is now pushed to GitHub and available to `bower`.
-
-# And finally publish to `npm`!
-$ npm publish
+$ builder run test-server-unit
 ```
 
-And you've published!
+#### Server-side REST Tests
 
-[builder]: https://github.com/FormidableLabs/builder
+`test/server/rest`
+
+REST tests rely on spinning up the backend web application and using an HTTP
+client to make real network requests to the server and validate responses.
+
+* Must set up / tear down the application web server.
+* Issue real REST requests against server and verify responses.
+* Fairly fast to execute (localhost network requests).
+* Cover more of an "end-to-end" perspective on validation.
+
+Your project will need to create a `base.spec.js` file to manage server setup/teardown.
+See the archetype templates for an example:
+[`base.spec.js`](./init/test/server/rest/base.spec.js)
+
+Run the tests with:
+
+```sh
+$ builder run test-server-rest
+```
+
+### Frontend Tests
+
+`test/client/spec`
+
+Client-side (aka "frontend") unit tests focus on one or more client application
+files in isolation. Some aspects of these tests:
+
+* Extremely fast to execute.
+* Execute via a test HTML driver page, not the web application HTML.
+* Must create mock DOM and data fixtures.
+* Mock out real browser network requests / time.
+* Typically test some aspect of the UI from the user perspective.
+* Run tests in the browser or from command line.
+* May need to be bundled like your application code.
+
+Build, then run the tests from the command line with:
+
+```sh
+$ builder run test-client
+$ builder run test-client-cov   # With coverage
+$ builder run test-client-dev   # (Faster) Use existing `builder run dev` watchers.
+```
+
+### Functional Tests
+
+`test/func`
+
+Functional (aka "integration", "end-to-end") tests rely on a full, working
+instance of the entire web application. These tests typically:
+
+* Are slower than the other test types.
+* Take a "black box" approach to the application and interact only via the
+  actual web UI.
+* Test user behaviors in an end-to-end manner.
+
+Your project will need to create a `base.spec.js` file to manage server setup/teardown.
+See the archetype templates for an example:
+[`base.spec.js`](./init/test/func/spec/base.spec.js)
+
+Run the tests with:
+
+```sh
+$ builder run test-func
+$ builder run test-func-cov   # With coverage
+$ builder run test-func-dev   # (Faster) Use existing `builder run dev` watchers.
+```
