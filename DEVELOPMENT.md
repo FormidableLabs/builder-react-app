@@ -33,6 +33,14 @@ From there you can see:
 * App: [127.0.0.1:3000](http://127.0.0.1:3000/)
 * Client tests: [127.0.0.1:3001/test/client/test.html](http://127.0.0.1:3001/test/client/test.html)
 
+### Webpack Config
+
+### moment
+
+If you are including [moment][] in your project, it will by default include more
+locales than just the `en` locale. All non-en locales will be filtered out by
+default in the archetype's webpack config.
+
 
 ## General Checks
 
@@ -217,3 +225,4 @@ $ builder run test-func-dev   # (Faster) Use existing `builder run dev` watchers
 
 [builder]: https://github.com/FormidableLabs/builder
 [builder usage]: https://github.com/FormidableLabs/builder#usage
+[moment]: http://momentjs.com/

@@ -46,7 +46,7 @@ module.exports = {
         )
       },
       {
-        test: /\.(png|svg|woff|woff2|ttf|eot)$/i,
+        test: /\.(png|svg|woff|woff2|ttf|eot|jpg|jpeg)$/i,
         loader: require.resolve("url-loader") + "?limit=10000"
       }
     ]
@@ -79,6 +79,8 @@ module.exports = {
     new StatsWriterPlugin({
       // Context is relative to `output.path` / `dist/js`
       filename: "../server/stats.json"
-    })
+    }),
+    // Moment by default includes all locales - this ensures that only english is loaded.
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
   ]
 };
