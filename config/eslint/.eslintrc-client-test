@@ -1,10 +1,7 @@
 ---
 extends:
-  - "defaults/configurations/walmart/es6-react"
+  - "defaults/configurations/walmart/es6-react-test"
   - ".eslintrc-base"
-
-env:
-  mocha: true
 
 globals:
   expect: false

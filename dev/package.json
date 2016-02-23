@@ -17,7 +17,7 @@
   "dependencies": {
     "babel-eslint": "^4.0.10",
     "eslint": "^1.2.1",
-    "eslint-config-defaults": "^4.2.0",
+    "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-filenames": "^0.1.2",
     "eslint-plugin-react": "^3.2.3",
     "isparta-loader": "^0.2.0",
