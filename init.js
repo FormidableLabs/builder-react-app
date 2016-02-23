@@ -39,7 +39,7 @@ module.exports = {
   prompts: {
     // See: https://github.com/npm/validate-npm-package-name
     packageName: {
-      message: "Package / GitHub project name (e.g., 'whiz-bang-component')",
+      message: "Package / GitHub project name (e.g., 'whiz-bang-app|server')",
       validate: function (val) {
         return /^([a-z0-9]+\-?)+$/.test(val.trim()) || "Must be lower + dash-cased string";
       }
