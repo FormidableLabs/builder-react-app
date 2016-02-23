@@ -17,7 +17,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: [/node_modules/],
+        include: [base.context],
         loaders: [
           require.resolve("react-hot-loader"),
           require.resolve("babel-loader") + "?optional=runtime&stage=2"
