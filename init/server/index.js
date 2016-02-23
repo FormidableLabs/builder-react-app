@@ -19,7 +19,7 @@ var express = require("express");
 var compress = require("compression");
 
 var app = module.exports = express();
-var util = require("./<%= serverUtilPath %>");
+var util = require("./util");
 
 // ----------------------------------------------------------------------------
 // Setup, Static Routes
