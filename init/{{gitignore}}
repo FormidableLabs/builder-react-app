@@ -1,11 +1,11 @@
-\.git
-\.hg
+.git
+.hg
 
-\.DS_Store
-\.project
+.DS_Store
+.project
 bower_components
 node_modules
-npm-debug\.log
+npm-debug.log
 
 # Build
 dist
