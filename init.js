@@ -60,6 +60,6 @@ module.exports = {
   // `(err, value)`.
   derived: {
     componentPath: function (data, cb) { cb(null, data.packageName); },
-    componentName: function (data, cb) { cb(null, pascalCase(data.packageName)) }
+    componentName: function (data, cb) { cb(null, pascalCase(data.packageName)); }
   }
 };
