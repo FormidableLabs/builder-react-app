@@ -4,12 +4,16 @@ Development
 We use [builder][] and `npm` to control all aspects of development and
 publishing.
 
-Install `builder` globally will provide easy access to the script but will
-still respect the specific builder version defined in your project.
+As a preliminary matter, please update your shell to include
+`./node_modules/.bin` in `PATH` like:
 
 ```sh
-$ npm install builder -g
+export PATH="${PATH}:./node_modules/.bin"
 ```
+
+So you can type `builder` instead of `./node_modules/.bin/builder` for all commands.
+
+See [builder usage][] for more information.
 
 
 ## Development
@@ -210,3 +214,6 @@ $ builder run test-func
 $ builder run test-func-cov   # With coverage
 $ builder run test-func-dev   # (Faster) Use existing `builder run dev` watchers.
 ```
+
+[builder]: https://github.com/FormidableLabs/builder
+[builder usage]: https://github.com/FormidableLabs/builder#usage
