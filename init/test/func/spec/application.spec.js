@@ -10,32 +10,27 @@
  * project.
  */
 var adapter = global.adapter;
-var promiseDone = require("../util/promise-done");
 
 describe("func/application", function () {
   describe("home", function () {
-    it("should load content", function (done) {
-      adapter.client
+    it("should load content", function () {
+      return adapter.client
         .url(global.TEST_FUNC_BASE_URL)
 
         .getText(".e2e-content").then(function (text) {
           expect(text).to.include("The time is");
-        })
-
-        .finally(promiseDone(done));
+        });
     });
   });
 
   describe("<%= componentPath %>", function () {
-    it("should load React page", function (done) {
-      adapter.client
+    it("should load React page", function () {
+      return adapter.client
         .url(global.TEST_FUNC_BASE_URL + "<%= componentPath %>")
 
         .getText("h2").then(function (text) {
           expect(text).to.include("React Page");
-        })
-
-        .finally(promiseDone(done));
+        });
     });
   });
 });

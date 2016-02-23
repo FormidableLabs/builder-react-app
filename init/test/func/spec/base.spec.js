@@ -23,11 +23,10 @@ var adapter = global.adapter;
 var ELEM_WAIT = 200; // Global wait.
 
 adapter.before();
-before(function (done) {
-  adapter.client
+before(function () {
+  return adapter.client
     // Set timeout for waiting on elements.
-    .timeoutsImplicitWait(ELEM_WAIT)
-    .call(done);
+    .timeoutsImplicitWait(ELEM_WAIT);
 });
 
 adapter.beforeEach();
