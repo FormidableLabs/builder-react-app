@@ -94,11 +94,11 @@ archetype.
 
 This archetype does not currently specify its own `.babelrc`. Your project
 should specify its own in the root directory if you want non-default Babel
-settings (like using stage 0, for instance), use a `.babelrc` like so:
+settings (like using stage 2, for instance), use a `.babelrc` like so:
 
 ```json
 {
-  "stage": 0,
+  "stage": 2,
   "nonStandard": true
 }
 ```
