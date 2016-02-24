@@ -1,6 +1,6 @@
 {
   "name": "<%= packageName %>",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "<%= packageDescription || packageName %>",
   "main": "lib/index.js",<% if (packageGitHubOrg) { %>
   "repository": {
