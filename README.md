@@ -114,7 +114,7 @@ settings (like using stage 2, for instance), use a `.babelrc` like so:
 ## Tasks
 
 ```
-$ builder help builder-react-app
+$ builder help
 
 Usage:
 
@@ -122,13 +122,20 @@ Usage:
 
 Actions:
 
-  help, run, concurrent, envs
+  run, concurrent, envs, help
 
 Flags: General
 
   --builderrc: Path to builder config file (default: `.builderrc`)
 
+  --help: Display help and exit
+
+  --version: Display version and exit
+
 Tasks:
+
+  npm:start
+    [builder-react-app] node server/index.js
 
   build
     [builder-react-app] webpack --config node_modules/builder-react-app/config/webpack/webpack.config.js
@@ -167,7 +174,7 @@ Tasks:
     [builder-react-app] eslint --ext .js,.jsx -c node_modules/builder-react-app/config/eslint/.eslintrc-client-test test/client
 
   lint-server
-    [builder-react-app] eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server server
+    [builder-react-app] eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server server shared
 
   lint-server-test
     [builder-react-app] eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server-test test/server test/func
@@ -195,9 +202,6 @@ Tasks:
 
   sources
     [builder-react-app] http-server -p 3001 .
-
-  start
-    [builder-react-app] node server/index.js
 
   test
     [builder-react-app] builder run test-client && builder run test-server && builder run test-func

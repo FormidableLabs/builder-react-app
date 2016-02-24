@@ -4,7 +4,7 @@
   "description": "Builder Archetype - React App",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "npm:start": "node server/index.js",
     "server": "nodemon --watch client --watch server --watch templates --ext js,jsx server/index.js",
     "server-dev": "builder envs server '[{\"WEBPACK_DEV\":true}]'",
     "server-hot": "builder envs server '[{\"WEBPACK_HOT\":true}]'",
