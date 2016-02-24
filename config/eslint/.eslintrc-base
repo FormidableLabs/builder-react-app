@@ -1,3 +1,2 @@
 ---
-rules:
-  no-magic-numbers: 0
+# Any base overrides can go here.
