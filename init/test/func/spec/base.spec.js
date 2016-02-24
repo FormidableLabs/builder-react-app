@@ -37,7 +37,8 @@ adapter.after();
 // Globals and dev. server initialization.
 // ----------------------------------------------------------------------------
 var app = require("../../../server");
-var APP_PORT = process.env.TEST_FUNC_PORT || 3030;
+var defaultAppPort = 3030;
+var APP_PORT = process.env.TEST_FUNC_PORT || defaultAppPort;
 var server;
 var wdsServer;
 
@@ -68,7 +69,8 @@ before(function (done) {
   // --------------------------------------------------------------------------
   // Webpack JS server - Create ephemeral WDS for this test run.
   // --------------------------------------------------------------------------
-  var WDS_PORT = process.env.TEST_FUNC_WDS_PORT || 3031;
+  var defaultWdsPort = 3031;
+  var WDS_PORT = process.env.TEST_FUNC_WDS_PORT || defaultWdsPort;
   var WDS_HOST = "127.0.0.1";
 
   /* eslint-disable global-require */

@@ -191,6 +191,13 @@ files in isolation. Some aspects of these tests:
 * Run tests in the browser or from command line.
 * May need to be bundled like your application code.
 
+Before functional tests can be run, you will need to need to set up selenium
+by running:
+
+```sh
+$ builder run install-dev
+```
+
 Build, then run the tests from the command line with:
 
 ```sh

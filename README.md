@@ -38,6 +38,14 @@ $ npm install --save builder-react-app
 $ npm install --save-dev builder-react-app-dev
 ```
 
+Before functional tests can be run, you will need to also run:
+
+```sh
+$ builder run install-dev
+```
+
+See the [development][] guide for information about using the `builder` command.
+
 
 ## Generator
 

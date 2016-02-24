@@ -5,7 +5,8 @@
  */
 // Globals
 var HOST = process.env.HOST || "127.0.0.1";
-var PORT = process.env.PORT || 3000;
+var defaultPort = 3000;
+var PORT = process.env.PORT || defaultPort;
 var RENDER_JS = true;
 var RENDER_SS = true;
 
@@ -50,6 +51,7 @@ var RouterContext = ReactRouter.RouterContext;
 var createStore = require("../client/store/create-store");
 var routes = require("../client/routes");
 var clientApi = require("../client/utils/api");
+var httpConstants = require("../shared/constants").http;
 
 // Server-side React
 var Index = React.createFactory(require("../templates/index"));
@@ -122,13 +124,13 @@ var renderReactPage = function (req, props, bootstrapData) {
 var reactResponse = function (req, res, bootstrapData) {
   match({ routes: routes, location: req.url }, function (error, redirect, props) {
     if (error) {
-      res.status(500).send(error.message);
+      res.status(httpConstants.INTERNAL_SERVER_ERROR).send(error.message);
     } else if (redirect) {
-      res.redirect(302, redirect.pathname + redirect.search);
+      res.redirect(httpConstants.MOVED_TEMPORARILY, redirect.pathname + redirect.search);
     } else if (props) {
-      res.status(200).send(renderReactPage(req, props, bootstrapData));
+      res.status(httpConstants.OK).send(renderReactPage(req, props, bootstrapData));
     } else {
-      res.status(404).send("Not found");
+      res.status(httpConstants.NOT_FOUND).send("Not found");
     }
   });
 };
@@ -148,7 +150,7 @@ app.get("/", function (req, res) {
         base: base
       });
     })
-    .catch(function (err) { res.status(500).send(err); });
+    .catch(function (err) { res.status(httpConstants.INTERNAL_SERVER_ERROR).send(err); });
 });
 
 // Example of route with no bootstrapped data

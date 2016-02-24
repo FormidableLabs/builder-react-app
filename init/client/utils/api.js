@@ -2,6 +2,7 @@
  * Fetch data from rest API.
  */
 import "isomorphic-fetch";
+import { http as httpConstants } from "../../shared/constants";
 
 const api = {
   BASE_URL: "",
@@ -19,7 +20,7 @@ const api = {
   fetchBase: () =>
     fetch(`${api.BASE_URL}/api/base`)
       .then((res) => {
-        if (res.status >= 400) {
+        if (res.status >= httpConstants.BAD_REQUEST) {
           throw new Error("Bad server response");
         }
         return res.json();
