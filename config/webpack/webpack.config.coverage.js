@@ -1,29 +1,38 @@
 "use strict";
+
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */
-var path = require("path");
-var _ = require("lodash");
-var testCfg = require("./webpack.config.test");
 
+var partial = require("webpack-partial").partial;
+var base = require("./partials/base");
+var testEntry = require("./partials/test-entry");
+var testOutput = require("./partials/test-output");
+var sourceMap = require("./partials/source-map");
+
+var path = require("path");
 var ROOT = process.cwd();
 
-module.exports = _.merge({}, testCfg, {
-  module: {
-    preLoaders: [
-      // Manually instrument client code for code coverage.
-      // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
-      {
-        test: /client\/.*\.jsx?$/,
-        exclude: [
-          path.join(ROOT, "test/"),
-          path.join(ROOT, "node_modules/")
-        ],
-        loader: require.resolve("isparta-loader") + "?{ babel: { stage: 2 } }"
-      }
-    ]
-  }
-});
-
-
-// RegExp(`${path.join(ROOT, "client")}/.*\.jsx?$`),
+module.exports = partial(
+  {
+    module: {
+      preLoaders: [
+        // Manually instrument client code for code coverage.
+        // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
+        {
+          name: "isparta",
+          test: /client\/.*\.jsx?$/,
+          exclude: [
+            path.join(ROOT, "test/"),
+            path.join(ROOT, "node_modules/")
+          ],
+          loader: require.resolve("isparta-loader")
+        }
+      ]
+    }
+  },
+  base,
+  testEntry,
+  testOutput,
+  sourceMap
+);

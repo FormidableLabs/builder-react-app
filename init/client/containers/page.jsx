@@ -4,8 +4,6 @@
 import React from "react";
 import Navigation from "../components/navigation";
 
-import "../styles/app.css";
-
 class Page extends React.Component {
   render() {
     return (

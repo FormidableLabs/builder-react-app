@@ -1,39 +1,44 @@
 "use strict";
-/**
- * Webpack production configuration
- */
-/*globals __dirname:false */
-var base = require("./webpack.config.dev");
 
-module.exports = {
-  cache: true,
-  context: base.context,
-  entry: [
-    "webpack/hot/only-dev-server",
-    base.entry
-  ],
-  output: base.output,
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        include: [base.context],
+/**
+ * Webpack hot configuration
+ */
+
+var partial = require("webpack-partial").partial;
+var base = require("./partials/base");
+var babelLoader = require("./partials/babel-loader");
+var binaryLoader = require("./partials/binary-loader");
+var appEntry = require("./partials/app-entry");
+var devOutput = require("./partials/dev-output");
+var sourceMap = require("./partials/source-map");
+
+module.exports = partial(
+  appEntry, // must come first for context
+  function (config) {
+    return partial(config, {
+      entry: [
+        "webpack/hot/only-dev-server"
+      ],
+      module: {
         loaders: [
-          require.resolve("react-hot-loader"),
-          require.resolve("babel-loader") + "?optional=runtime&stage=2"
+          {
+            name: "babel",
+            loaders: [
+              require.resolve("react-hot-loader")
+            ]
+          },
+          {
+            name: "style",
+            test: /\.css$/,
+            loader: require.resolve("style-loader") + "!" + require.resolve("css-loader")
+          }
         ]
-      },
-      {
-        test: /\.css$/,
-        loader: require.resolve("style-loader") + "!" + require.resolve("css-loader")
-      },
-      {
-        test: /\.(png|svg|woff|woff2|ttf|eot)$/i,
-        loader: require.resolve("url-loader") + "?limit=10000"
       }
-    ]
+    });
   },
-  resolve: base.resolve,
-  devtool: "source-map",
-  plugins: base.plugins
-};
+  base,
+  babelLoader,
+  binaryLoader,
+  devOutput,
+  sourceMap
+);
