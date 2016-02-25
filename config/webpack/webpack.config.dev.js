@@ -1,29 +1,20 @@
 "use strict";
+
 /**
  * Webpack development configuration
  */
-/*globals __dirname:false */
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var base = require("./webpack.config");
+var partial = require("webpack-partial").partial;
+var base = require("./partials/base");
+var baseLoader = require("./partials/base-loader");
+var appEntry = require("./partials/app-entry");
+var devOutput = require("./partials/dev-output");
+var sourceMap = require("./partials/source-map");
 
-module.exports = {
-  cache: true,
-  context: base.context,
-  entry: base.entry,
-  output: {
-    path: __dirname,
-    filename: "bundle.js",
-    publicPath: "/js/"
-  },
-  module: base.module,
-  resolve: base.resolve,
-  devtool: "source-map",
-  plugins: [
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("style.css", {
-      allChunks: true
-    })
-  ]
-};
+module.exports = partial(
+  base,
+  baseLoader,
+  appEntry,
+  devOutput,
+  sourceMap
+);
