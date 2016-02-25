@@ -1,39 +1,43 @@
 "use strict";
-/**
- * Webpack production configuration
- */
-/*globals __dirname:false */
-var base = require("./webpack.config.dev");
 
-module.exports = {
+/**
+ * Webpack hot configuration
+ */
+
+var compose = require("lodash/fp/flow");
+var babel = require("./partials/babel");
+var binaries = require("./partials/binaries");
+var appEntry = require("./partials/app-entry");
+var devOutput = require("./partials/dev-output");
+var sourceMap = require("./partials/source-map");
+
+module.exports = compose(
+  appEntry,
+  babel,
+  binaries,
+  devOutput,
+  sourceMap
+)({
   cache: true,
-  context: base.context,
+  resolve: {
+    extensions: ["", ".js", ".jsx"]
+  },
   entry: [
-    "webpack/hot/only-dev-server",
-    base.entry
+    "webpack/hot/only-dev-server"
   ],
-  output: base.output,
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        include: [base.context],
+        name: "babel",
         loaders: [
-          require.resolve("react-hot-loader"),
-          require.resolve("babel-loader") + "?optional=runtime&stage=2"
+          require.resolve("react-hot-loader")
         ]
       },
       {
+        name: "style",
         test: /\.css$/,
         loader: require.resolve("style-loader") + "!" + require.resolve("css-loader")
-      },
-      {
-        test: /\.(png|svg|woff|woff2|ttf|eot)$/i,
-        loader: require.resolve("url-loader") + "?limit=10000"
       }
     ]
-  },
-  resolve: base.resolve,
-  devtool: "source-map",
-  plugins: base.plugins
-};
+  }
+});

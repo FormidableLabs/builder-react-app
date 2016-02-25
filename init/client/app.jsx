@@ -11,6 +11,8 @@ import createBrowserHistory from "history/lib/createBrowserHistory";
 import routes from "./routes";
 import createStore from "./store/create-store";
 
+import "./styles/app.css";
+
 const history = useRouterHistory(createBrowserHistory)();
 const rootEl = document.getElementById("js-content");
 
