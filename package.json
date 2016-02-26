@@ -75,6 +75,10 @@
     "webpack-partial": "^1.1.2",
     "webpack-stats-plugin": "^0.1.1"
   },
+  "peerDependencies": {
+    "webpack": "^1.12.14",
+    "babel-runtime": "^5.8.35"
+  },
   "devDependencies": {
     "babel-eslint": "^4.1.8",
     "builder-support": "0.2.0",

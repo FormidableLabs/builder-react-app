@@ -15,7 +15,6 @@
   "scripts": {},
   "dependencies": {
     "babel-runtime": "^5.8.19",
-    "bluebird": "^2.9.34",
     "builder": "^2.4.0",
     "builder-react-app": "<%= archetype.package.version ? '^' + archetype.package.version : '*' %>",
     "compression": "^1.5.2",
@@ -31,7 +30,7 @@
     "redux": "^3.0.2",
     "redux-logger": "^2.0.1",
     "redux-thunk": "^1.0.0",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.14"
   },
   "devDependencies": {
     "builder-react-app-dev": "<%= archetype.devPackage.version ? '^' + archetype.devPackage.version : '*' %>",
