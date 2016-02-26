@@ -203,7 +203,7 @@ Tasks:
   sources
     [builder-react-app] http-server -p 3001 .
 
-  test
+  test-base
     [builder-react-app] builder run test-client && builder run test-server && builder run test-func
 
   test-ci

@@ -84,7 +84,7 @@ Which is currently comprised of:
 ```sh
 $ builder run lint      # AND ...
 
-$ builder run test      # PhantomJS only
+$ builder run test-base # PhantomJS only
 $ builder run test-cov  # (OR) PhantomJS w/ coverage
 $ builder run test-ci   # (OR) PhantomJS,Firefox + coverage
 ```

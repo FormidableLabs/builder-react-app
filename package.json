@@ -30,7 +30,7 @@
     "test-func": "mocha --opts node_modules/builder-react-app/config/mocha/func/mocha.opts test/func/spec",
     "test-func-cov": "istanbul cover --config node_modules/builder-react-app/config/istanbul/.istanbul.func.yml _mocha -- --opts node_modules/builder-react-app/config/mocha/func/mocha.opts test/func/spec",
     "test-func-dev": "mocha --opts node_modules/builder-react-app/config/mocha/func/mocha.dev.opts test/func/spec",
-    "test": "builder run test-client && builder run test-server && builder run test-func",
+    "test-base": "builder run test-client && builder run test-server && builder run test-func",
     "test-ci": "builder run test-client-ci && builder run test-server-cov && builder run test-func-cov",
     "test-ci-win": "builder run test-client-ci-win && builder run test-server && echo 'TODO(36) fix Appveyor test-func'",
     "test-cov": "builder run test-client-cov && builder run test-server-cov && builder run test-func-cov",
