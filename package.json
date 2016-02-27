@@ -35,7 +35,7 @@
     "test-ci-win": "builder run test-client-ci-win && builder run test-server && echo 'TODO(36) fix Appveyor test-func'",
     "test-cov": "builder run test-client-cov && builder run test-server-cov && builder run test-func-cov",
     "test-dev": "builder run test-client-dev && builder run test-server && builder run test-func-dev",
-    "check": "builder concurrent lint test",
+    "check": "builder concurrent lint test-base",
     "check-ci": "builder concurrent lint test-ci",
     "check-ci-win": "builder concurrent lint test-ci-win",
     "check-cov": "builder concurrent lint test-cov",
