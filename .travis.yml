@@ -1,0 +1,49 @@
+language: node_js
+
+node_js:
+  - "0.10"
+  - "0.12"
+  - "4"
+
+# Use container-based Travis infrastructure.
+sudo: false
+
+branches:
+  only:
+    - master
+
+before_install:
+  # GUI for real browsers.
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+before_script:
+  # Install dev. stuff (e.g., selenium drivers).
+  - builder run install-dev
+
+script:
+  # Check archetype.
+  - npm --version
+  - npm run builder:check
+
+  # Create global link for the archetypes for our
+  - npm link
+  - cd dev && npm link && cd ..
+
+  # Initialize a fresh project from templates
+  - npm install -g builder-init
+  - mkdir .builder-init-tmp
+  - cd .builder-init-tmp
+  - >-
+    builder-init $PWD/.. --prompts='{
+    "packageName":"whiz-bang",
+    "packageGitHubOrg":"Acme",
+    "packageDescription":"Whiz Bang",
+    "destination":"whiz-bang"}'
+  # Run initialized project's own CI with npm link'ed archetypes.
+  - cd whiz-bang
+  - npm link builder-react-app builder-react-app-dev
+  - npm install
+  - node_modules/.bin/builder run check-ci
+  - npm prune --production
+  - node_modules/.bin/builder run build
