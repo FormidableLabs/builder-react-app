@@ -1,16 +1,66 @@
-# Version control
-.git
-.hg
-
-# Mac
+### OSX ###
 .DS_Store
+.AppleDouble
+.LSOverride
 
-# IDEs
-.project
+# Icon must end with two \r
+Icon
 
-# Build
-dist
 
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+
+### Node ###
 # Logs
 logs
 *.log
@@ -34,10 +84,12 @@ coverage
 # node-waf configuration
 .lock-wscript
 
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
 # Dependency directories
 node_modules
 jspm_packages
-bower_components
 
 # Optional npm cache directory
 .npm
@@ -45,5 +97,12 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
+# Build
+dist/
+
 # Deployment
 Procfile
+
+
+### IDEs ###
+.project
