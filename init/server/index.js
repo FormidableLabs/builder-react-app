@@ -27,6 +27,10 @@ var util = require("./util");
 // ----------------------------------------------------------------------------
 app.use(compress());
 
+// Logger
+var logger = require("express-bunyan-logger");
+app.use(logger());
+
 // Static libraries and application HTML page.
 app.use("/js", express.static(path.join(__dirname, "../dist/js")));
 
