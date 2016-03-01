@@ -1,7 +1,6 @@
 ---
 extends:
   - "defaults/configurations/walmart/es5-node"
-  - ".eslintrc-base"
 
 globals:
   fetch: false

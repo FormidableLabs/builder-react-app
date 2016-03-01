@@ -1,7 +1,6 @@
 ---
 extends:
   - "defaults/configurations/walmart/es6-react-test"
-  - ".eslintrc-base"
 
 globals:
   expect: false
