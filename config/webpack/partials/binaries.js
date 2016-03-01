@@ -1,6 +1,6 @@
 "use strict";
 
-var partial = require("webpack-partial").partial;
+var partial = require("webpack-partial").default;
 
 module.exports = function (config) {
   return partial(config, {

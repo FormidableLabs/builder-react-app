@@ -1,6 +1,6 @@
 "use strict";
 
-var partial = require("webpack-partial").partial;
+var partial = require("webpack-partial").default;
 var path = require("path");
 
 var ROOT = process.cwd();

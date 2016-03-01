@@ -1,6 +1,6 @@
 "use strict";
 
-var partial = require("webpack-partial").partial;
+var partial = require("webpack-partial").default;
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var ROOT = process.cwd();
