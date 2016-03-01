@@ -35,18 +35,14 @@
     "karma-spec-reporter": "0.0.24",
     "karma-webpack": "^1.7.0",
     "lodash": "^4.5.1",
-    "mocha": "^2.2.5",
     "phantomjs": "^1.9.18",
     "react-hot-loader": "^1.2.8",
     "selenium-standalone": "^4.5.3",
-    "sinon": "^1.16.1",
-    "webpack": "^1.12.14",
     "webpack-dev-server": "^1.10.1"
   },
   "peerDependencies": {
     "mocha": "^2.2.5",
-    "sinon": "^1.16.1",
-    "webpack": "^1.12.14"
+    "sinon": "^1.16.1"
   },
   "devDependencies": {}
 }
