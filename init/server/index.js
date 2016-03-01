@@ -104,7 +104,7 @@ var bundles = function (renderJs) {
     js: bundleJs,
     css: bundleCss
   };
-}
+};
 
 var renderReactPage = function (req, props, bootstrapData) {
   // Render JS? Server-side? Bootstrap?
