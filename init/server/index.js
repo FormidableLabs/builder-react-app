@@ -69,21 +69,22 @@ var renderPage = function (component) {
   return "<!DOCTYPE html>" + ReactDOMServer.renderToStaticMarkup(component);
 };
 
-var renderReactPage = function (req, props, bootstrapData) {
-  /*eslint max-statements:[2,25]*/
-  // JS Bundle sources.
-  var WEBPACK_TEST_BUNDLE = process.env.WEBPACK_TEST_BUNDLE;  // Switch to test webpack-dev-server
-  var WEBPACK_DEV = process.env.WEBPACK_DEV === "true";       // Switch to dev webpack-dev-server
-  var WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
+// JS Bundle sources.
+var WEBPACK_TEST_BUNDLE = process.env.WEBPACK_TEST_BUNDLE;  // Switch to test webpack-dev-server
+var WEBPACK_DEV = process.env.WEBPACK_DEV === "true";       // Switch to dev webpack-dev-server
+var WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
 
+// Dev bundle URLs
+var devBundleJsUrl = "http://127.0.0.1:2992/js/bundle.js";
+var devBundleCssUrl = "http://127.0.0.1:2992/js/style.css";
+
+var renderReactPage = function (req, props, bootstrapData) {
   // Render JS? Server-side? Bootstrap?
   var mode = req.query.__mode;
   var renderJs = RENDER_JS && mode !== "nojs";
   var renderSs = RENDER_SS && mode !== "noss";
 
   // JS/CSS bundle rendering.
-  var devBundleJsUrl = "http://127.0.0.1:2992/js/bundle.js";
-  var devBundleCssUrl = "http://127.0.0.1:2992/js/style.css";
   var bundleJs;
   var bundleCss;
 
