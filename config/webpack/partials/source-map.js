@@ -1,9 +1,18 @@
 "use strict";
 
-var partial = require("webpack-partial").partial;
+var partial = require("webpack-partial").default;
+const SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 
 module.exports = function (config) {
   return partial(config, {
-    devtool: "source-map"
+    plugins: [
+      new SourceMapDevToolPlugin({
+        test: /\.(css|js)($|\?)/,
+        filename: "[file].map",
+        append: "\n//# sourceMappingURL=[url]",
+        module: true,
+        columns: true
+      })
+    ]
   });
 };
