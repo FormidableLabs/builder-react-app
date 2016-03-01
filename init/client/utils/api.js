@@ -25,7 +25,6 @@ const api = {
         }
         return res.json();
       })
-      .then((data) => data)
 };
 
 export default api;
