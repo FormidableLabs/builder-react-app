@@ -78,12 +78,7 @@ var WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
 var devBundleJsUrl = "http://127.0.0.1:2992/js/bundle.js";
 var devBundleCssUrl = "http://127.0.0.1:2992/js/style.css";
 
-var renderReactPage = function (req, props, bootstrapData) {
-  // Render JS? Server-side? Bootstrap?
-  var mode = req.query.__mode;
-  var renderJs = RENDER_JS && mode !== "nojs";
-  var renderSs = RENDER_SS && mode !== "noss";
-
+var bundles = function (renderJs) {
   // JS/CSS bundle rendering.
   var bundleJs;
   var bundleCss;
@@ -105,6 +100,18 @@ var renderReactPage = function (req, props, bootstrapData) {
     bundleCss = path.join("/js", stats.assetsByChunkName.main[1]);
   }
 
+  return {
+    js: bundleJs,
+    css: bundleCss
+  };
+}
+
+var renderReactPage = function (req, props, bootstrapData) {
+  // Render JS? Server-side? Bootstrap?
+  var mode = req.query.__mode;
+  var renderJs = RENDER_JS && mode !== "nojs";
+  var renderSs = RENDER_SS && mode !== "noss";
+
   // Server-rendered client component.
   var content;
   if (renderSs) {
@@ -122,10 +129,7 @@ var renderReactPage = function (req, props, bootstrapData) {
     render: {
       js: renderJs
     },
-    bundles: {
-      js: bundleJs,
-      css: bundleCss
-    },
+    bundles: bundles(renderJs),
     content: content
   }));
 };
