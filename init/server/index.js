@@ -32,7 +32,7 @@ var logger = require("express-bunyan-logger");
 app.use(logger());
 
 // Smart favicon handling
-const favicon = require("serve-favicon");
+var favicon = require("serve-favicon");
 app.use(favicon(path.join(__dirname, "../static/favicon.ico")));
 
 // Static libraries and application HTML page.
