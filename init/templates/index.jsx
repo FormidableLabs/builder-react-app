@@ -23,7 +23,6 @@ export default class Index extends React.Component {
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
 
           {/* Polyfills before CSS */}
           <meta name="ie-shiv-polyfill" dangerouslySetInnerHTML={{__html:
