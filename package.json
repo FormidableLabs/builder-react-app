@@ -79,7 +79,6 @@
   "devDependencies": {
     "babel-eslint": "^4.1.8",
     "builder-support": "0.3.0",
-    "clean-webpack-plugin": "^0.1.8",
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-filenames": "^0.2.0"
