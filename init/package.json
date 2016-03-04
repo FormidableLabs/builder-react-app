@@ -1,0 +1,56 @@
+{
+  "name": "<%= packageName %>",
+  "version": "1.0.0",
+  "description": "<%= packageDescription || packageName %>",
+  "main": "lib/index.js",<% if (packageGitHubOrg) { %>
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>/issues"
+  },
+  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>",<% } %>
+  "scripts": {},
+  "dependencies": {
+    "babel-runtime": "^5.8.19",
+    "builder": "^2.4.0",
+    "builder-react-app": "<%= archetype.package.version ? '^' + archetype.package.version : '*' %>",
+    "compression": "^1.5.2",
+    "es6-promise": "^3.0.2",
+    "express": "^4.13.1",
+    "express-bunyan-logger": "^1.2.0",
+    "history": "^2.0.0",
+    "isomorphic-fetch": "^2.1.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "react-router": "^2.0.0",
+    "react-router-redux": "^4.0.0",
+    "redux": "^3.0.2",
+    "redux-logger": "^2.0.1",
+    "redux-thunk": "^1.0.0",
+    "serve-favicon": "^2.3.0",
+    "webpack": "^1.12.14"
+  },
+  "devDependencies": {
+    "builder-react-app-dev": "<%= archetype.devPackage.version ? '^' + archetype.devPackage.version : '*' %>",
+    "chai": "^3.2.0",
+    "coveralls": "^2.11.4",
+    "guacamole": "^1.1.2",
+    "http-server": "^0.9.0",
+    "jade": "^1.11.0",
+    "marked": "^0.3.4",
+    "mocha": "^2.2.5",
+    "nodemon": "^1.4.0",
+    "react-addons-test-utils": "^0.14.7",
+    "recluster": "^0.4.0",
+    "rowdy": "^0.4.0",
+    "saucelabs": "^0.1.1",
+    "sinon": "^1.16.1",
+    "sinon-chai": "^2.8.0",
+    "supertest": "^1.0.1",
+    "webdriverio": "^3.1.0"
+  }
+}

@@ -1,4 +1,87 @@
 {
   "name": "builder-react-app",
-  "version": "0.0.0"
+  "version": "0.1.0",
+  "description": "Builder Archetype - React App",
+  "main": "index.js",
+  "scripts": {
+    "npm:start": "node server/index.js",
+    "server": "nodemon --watch client --watch server --watch templates --ext js,jsx server/index.js",
+    "server-dev": "builder envs server '[{\"WEBPACK_DEV\":true}]'",
+    "server-hot": "builder envs server '[{\"WEBPACK_HOT\":true}]'",
+    "server-wds-dev": "webpack-dev-server --config node_modules/builder-react-app/config/webpack/webpack.config.dev.js --progress --colors --port 2992",
+    "server-wds-hot": "webpack-dev-server --config node_modules/builder-react-app/config/webpack/webpack.config.hot.js --hot --progress --colors --port 2992 --inline",
+    "server-wds-test": "webpack-dev-server --port 3001 --config node_modules/builder-react-app/config/webpack/webpack.config.test.js --colors",
+    "lint-client": "eslint --ext .js,.jsx -c node_modules/builder-react-app/config/eslint/.eslintrc-client client templates",
+    "lint-client-test": "eslint --ext .js,.jsx -c node_modules/builder-react-app/config/eslint/.eslintrc-client-test test/client",
+    "lint-server": "eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server server shared",
+    "lint-server-test": "eslint -c node_modules/builder-react-app/config/eslint/.eslintrc-server-test test/server test/func",
+    "lint": "builder run lint-client && builder run lint-client-test && builder run lint-server && builder run lint-server-test",
+    "test-client": "karma start node_modules/builder-react-app/config/karma/karma.conf.js",
+    "test-client-ci": "karma start --browsers PhantomJS,Firefox node_modules/builder-react-app/config/karma/karma.conf.coverage.js",
+    "test-client-ci-win": "karma start --browsers PhantomJS,IE node_modules/builder-react-app/config/karma/karma.conf.js",
+    "test-client-cov": "karma start node_modules/builder-react-app/config/karma/karma.conf.coverage.js",
+    "test-client-dev": "karma start node_modules/builder-react-app/config/karma/karma.conf.dev.js",
+    "test-server-rest": "mocha --opts node_modules/builder-react-app/config/mocha/server/mocha.opts test/server/rest",
+    "test-server-rest-cov": "istanbul cover --config node_modules/builder-react-app/config/istanbul/.istanbul.server-rest.yml _mocha -- --opts node_modules/builder-react-app/config/mocha/server/mocha.opts test/server/rest",
+    "test-server-unit": "mocha --opts node_modules/builder-react-app/config/mocha/server/mocha.opts test/server/spec",
+    "test-server-unit-cov": "istanbul cover --config node_modules/builder-react-app/config/istanbul/.istanbul.server-unit.yml _mocha -- --opts node_modules/builder-react-app/config/mocha/server/mocha.opts test/server/spec",
+    "test-server": "builder concurrent test-server-unit test-server-rest",
+    "test-server-cov": "builder concurrent test-server-unit-cov test-server-rest-cov",
+    "test-func": "mocha --opts node_modules/builder-react-app/config/mocha/func/mocha.opts test/func/spec",
+    "test-func-cov": "istanbul cover --config node_modules/builder-react-app/config/istanbul/.istanbul.func.yml _mocha -- --opts node_modules/builder-react-app/config/mocha/func/mocha.opts test/func/spec",
+    "test-func-dev": "mocha --opts node_modules/builder-react-app/config/mocha/func/mocha.dev.opts test/func/spec",
+    "test-base": "builder run test-client && builder run test-server && builder run test-func",
+    "test-ci": "builder run test-client-ci && builder run test-server-cov && builder run test-func-cov",
+    "test-ci-win": "builder run test-client-ci-win && builder run test-server && echo 'TODO(36) fix Appveyor test-func'",
+    "test-cov": "builder run test-client-cov && builder run test-server-cov && builder run test-func-cov",
+    "test-dev": "builder run test-client-dev && builder run test-server && builder run test-func-dev",
+    "check": "builder concurrent lint test-base",
+    "check-ci": "builder concurrent lint test-ci",
+    "check-ci-win": "builder concurrent lint test-ci-win",
+    "check-cov": "builder concurrent lint test-cov",
+    "check-dev": "builder concurrent lint test-dev",
+    "install-dev": "selenium-standalone install",
+    "sources": "http-server -p 3001 .",
+    "build": "webpack --config node_modules/builder-react-app/config/webpack/webpack.config.js",
+    "watch": "webpack --config node_modules/builder-react-app/config/webpack/webpack.config.js --watch --colors",
+    "prod": "builder concurrent watch server sources",
+    "dev": "builder concurrent server-wds-test server-wds-dev server-dev",
+    "hot": "builder concurrent server-wds-test server-wds-hot server-hot",
+    "builder:lint-server": "eslint --color -c config/eslint/.eslintrc-server *.js config/karma config/webpack",
+    "builder:lint": "npm run builder:lint-server",
+    "builder:check": "npm run builder:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FormidableLabs/builder-react-app.git"
+  },
+  "author": "Zach Hale <zach.hale@formidable.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FormidableLabs/builder-react-app/issues"
+  },
+  "homepage": "https://github.com/FormidableLabs/builder-react-app#readme",
+  "dependencies": {
+    "babel": "^5.8.35",
+    "babel-core": "^5.8.35",
+    "babel-loader": "^5.4.0",
+    "css-loader": "^0.19.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.4",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.6",
+    "webpack-partial": "^1.1.2",
+    "webpack-stats-plugin": "^0.1.1"
+  },
+  "peerDependencies": {
+    "webpack": "^1.12.14"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.8",
+    "builder-support": "0.3.0",
+    "clean-webpack-plugin": "^0.1.8",
+    "eslint": "^1.10.3",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-filenames": "^0.2.0"
+  }
 }
