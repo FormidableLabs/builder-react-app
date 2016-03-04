@@ -4,7 +4,7 @@ Builder Archetype: React App
 A React app archetype for [builder][].
 
 This archetype provides both a robust set of scripts and default configs for a
-standard React app project as well as a `builder-init` compatible app generator
+standard React app project as well as a [builder-init][] compatible app generator
 for bootstrapping a new react app using this archetype.
 
 Features provided by this archetype's scripts:
