@@ -66,10 +66,10 @@ var renderPage = function (component) {
   return "<!DOCTYPE html>" + ReactDOMServer.renderToStaticMarkup(component);
 };
 
-// JS Bundle sources.
-var WEBPACK_TEST_BUNDLE = process.env.WEBPACK_TEST_BUNDLE;  // Switch to test webpack-dev-server
-var WEBPACK_DEV = process.env.WEBPACK_DEV === "true";       // Switch to dev webpack-dev-server
-var WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
+// JS Bundle sources are set when server is started
+var WEBPACK_TEST_BUNDLE;
+var WEBPACK_DEV;
+var WEBPACK_HOT;
 
 // Dev bundle URLs
 var devBundleJsUrl = "http://127.0.0.1:2992/js/bundle.js";
@@ -170,6 +170,12 @@ app.get("/<%= componentPath %>", function (req, res) {
 
 // Start helper.
 app.start = function (port, callback) {
+  // load webpack ENVs on server start instead of when the file is loaded
+  // so that functional tests can set ENV's before starting the server
+  WEBPACK_TEST_BUNDLE = process.env.WEBPACK_TEST_BUNDLE;
+  WEBPACK_DEV = process.env.WEBPACK_DEV === "true";
+  WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
+
   // Start logger, throttled based on NODE_ENV
   app.use(logger({
     streams: [{
