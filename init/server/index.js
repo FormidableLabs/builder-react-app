@@ -180,8 +180,8 @@ app.start = function (port, callback) {
   app.use(logger({
     streams: [{
       level: process.env.NODE_ENV.match(/^test/) ?
-        'error' :
-        'info',
+        "error" :
+        "info",
       stream: process.stdout
     }]
   }));
