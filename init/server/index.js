@@ -18,6 +18,8 @@ require.extensions[".css"] = function () { return null; };
 var path = require("path");
 var express = require("express");
 var compress = require("compression");
+var logger = require("express-bunyan-logger");
+var favicon = require("serve-favicon");
 
 var app = module.exports = express();
 var util = require("./util");
@@ -27,12 +29,7 @@ var util = require("./util");
 // ----------------------------------------------------------------------------
 app.use(compress());
 
-// Logger
-var logger = require("express-bunyan-logger");
-app.use(logger());
-
 // Smart favicon handling
-var favicon = require("serve-favicon");
 app.use(favicon(path.join(__dirname, "../static/favicon.ico")));
 
 // Static libraries and application HTML page.
@@ -178,6 +175,16 @@ app.start = function (port, callback) {
   WEBPACK_TEST_BUNDLE = process.env.WEBPACK_TEST_BUNDLE;
   WEBPACK_DEV = process.env.WEBPACK_DEV === "true";
   WEBPACK_HOT = process.env.WEBPACK_HOT === "true";
+
+  // Start logger, throttled based on NODE_ENV
+  app.use(logger({
+    streams: [{
+      level: process.env.NODE_ENV.match(/^test/) ?
+        "error" :
+        "info",
+      stream: process.stdout
+    }]
+  }));
 
   port = port || PORT;
   clientApi.setBaseUrl(HOST, port);
