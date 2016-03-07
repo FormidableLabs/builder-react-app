@@ -179,7 +179,7 @@ app.start = function (port, callback) {
   // Start logger, throttled based on NODE_ENV
   app.use(logger({
     streams: [{
-      level: process.env.NODE_ENV.match(/^test/) ?
+      level: process.env.NODE_ENV && process.env.NODE_ENV.match(/^test/) ?
         "error" :
         "info",
       stream: process.stdout
