@@ -1,5 +1,5 @@
-Builder Archetype: React App
-==================================
+Builder Archetype: React App [![npm package][npm-badge]][npm]
+============================
 
 A React app archetype for [builder][].
 
@@ -263,6 +263,9 @@ Tasks:
   watch
     [builder-react-app] webpack --config node_modules/builder-react-app/config/webpack/webpack.config.js --watch --colors
 ```
+
+[npm-badge]: https://img.shields.io/npm/v/builder-react-app.svg?style=flat-square
+[npm]: https://www.npmjs.org/package/builder-react-app
 
 [builder]: https://github.com/FormidableLabs/builder
 [builder-init]: https://github.com/FormidableLabs/builder-init
