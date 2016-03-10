@@ -12,7 +12,7 @@ var sinon = require("sinon");
 
 before(function () {
   // Set test environment
-  process.env.NODE_ENV = process.env.NODE_ENV || "test-rest-unit";
+  process.env.NODE_ENV = process.env.NODE_ENV || "test-server-unit";
 });
 
 beforeEach(function () {
