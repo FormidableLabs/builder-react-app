@@ -9,7 +9,7 @@
  * in a separate process from other types of tests.
  */
 // Set test environment
-process.env.NODE_ENV = process.env.NODE_ENV || "test-rest-spec";
+process.env.NODE_ENV = process.env.NODE_ENV || "test-server-rest";
 
 var sinon = require("sinon");
 var app = require("../../../server");
