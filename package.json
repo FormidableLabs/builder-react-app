@@ -1,6 +1,6 @@
 {
   "name": "builder-react-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Builder Archetype - React App",
   "main": "index.js",
   "scripts": {
