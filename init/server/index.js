@@ -57,14 +57,7 @@ var createStore = require("../client/store/create-store");
 var routes = require("../client/routes");
 var clientApi = require("../client/utils/api");
 var httpConstants = require("../shared/constants").http;
-
-// Server-side React
-var Index = React.createFactory(require("../templates/index"));
-// Have to manually hack in the doctype because not contained with single
-// element for full page.
-var renderPage = function (component) {
-  return "<!DOCTYPE html>" + ReactDOMServer.renderToStaticMarkup(component);
-};
+var indexTemplate = require("../templates/index");
 
 // JS Bundle sources are set when server is started
 var WEBPACK_TEST_BUNDLE;
@@ -121,14 +114,14 @@ var renderReactPage = function (req, props, bootstrapData) {
   }
 
   // Response context
-  return renderPage(new Index({
+  return indexTemplate({
     bootstrap: JSON.stringify(bootstrapData),
     render: {
       js: renderJs
     },
     bundles: bundles(renderJs),
     content: content
-  }));
+  });
 };
 
 var reactResponse = function (req, res, bootstrapData) {
