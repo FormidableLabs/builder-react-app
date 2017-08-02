@@ -1,6 +1,6 @@
 {
   "name": "builder-react-app-dev",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Builder Archetype - React App (Development)",
   "main": "index.js",
   "scripts": {},
@@ -42,7 +42,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "peerDependencies": {
-    "mocha": "^2.2.5",
+    "mocha": "^3.5.0",
     "sinon": "^1.16.1"
   },
   "devDependencies": {}
