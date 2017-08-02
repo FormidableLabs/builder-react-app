@@ -38,7 +38,7 @@
     "lodash": "^4.5.1",
     "phantomjs": "^1.9.18",
     "react-hot-loader": "^1.2.8",
-    "selenium-standalone": "^4.5.3",
+    "selenium-standalone": "^5.8.0",
     "webpack-dev-server": "^1.10.1"
   },
   "peerDependencies": {
